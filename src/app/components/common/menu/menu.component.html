@@ -1,0 +1,21 @@
+<div class="sidebar" [class.open]="isDrawerOpen">
+  <div class="menu-group" *ngFor="let group of menuItems">
+    <div class="group-header" (click)="toggleGroup(group)">
+      <i class="material-icons">{{ group.icon }}</i>
+      <span>{{ group.text }}</span>
+    </div>
+    <ul class="group-items" *ngIf="group.expanded">
+      <li *ngFor="let item of group.items" [routerLink]="item.path" routerLinkActive="active" (click)="onItemClick(item)">
+        <i class="material-icons">{{ item.icon }}</i>
+        <span>{{ item.text }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Contenido principal -->
+<div class="content">
+  <h1>Prueba SMARTBITERP</h1>
+<router-outlet></router-outlet>
+</div>

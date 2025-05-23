@@ -1,0 +1,30 @@
+<ng-container *ngIf="expenseType">
+<h2>Modificar tipo de gasto</h2>
+
+<dx-form [formData]="expenseType" (onSubmit)="onSubmit()">
+    <dxi-item dataField="codigo">
+  <div *dxTemplate="let data of 'content'">
+    <label>{{ expenseType.code }}</label>
+  </div>
+</dxi-item>
+
+  <dxi-item dataField="Nombre" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese el nombre del tipo de gasto' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="expenseType.name"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <dxi-item dataField="Descripción" [editorType]="'dxTextArea'" [editorOptions]="{ placeholder: 'Ingrese una descripción' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-area [(value)]="expenseType.description"></dx-text-area>
+    </div>
+  </dxi-item>
+
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'">
+      <dx-button text="Guardar" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+</dx-form>
+
+</ng-container>

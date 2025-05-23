@@ -1,0 +1,38 @@
+<h2>Nuevo Fondo Monetario</h2>
+
+<dx-form
+  [formData]="monetaryFund"
+  [colCount]="2"
+  labelLocation="top"
+  (onSubmit)="onSubmit()"
+>
+
+  <!-- Nombre -->
+  <dxi-item dataField="name" [editorType]="'dxTextBox'" [editorOptions]="{ placeholder: 'Ingrese el nombre del fondo' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-text-box [(value)]="monetaryFund.name"></dx-text-box>
+    </div>
+  </dxi-item>
+
+  <!-- Tipo -->
+   <dxi-item dataField="type" [editorType]="'dxSelectBox'" [editorOptions]="{ items: types, placeholder: 'Seleccione un tipo' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-select-box [(value)]="monetaryFund.type" [items]="types"></dx-select-box>
+    </div>
+  </dxi-item>
+
+  <!-- Saldo Inicial -->
+  <dxi-item dataField="initialBalance" [editorType]="'dxNumberBox'" [editorOptions]="{ placeholder: 'Saldo inicial' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-number-box [(value)]="monetaryFund.initialBalance"></dx-number-box>
+    </div>
+  </dxi-item>
+
+  <!-- Botón Guardar -->
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'" style="text-align: right;">
+      <dx-button text="Guardar" type="success" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+
+</dx-form>

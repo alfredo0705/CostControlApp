@@ -1,0 +1,44 @@
+<h2>Presupuesto por usuario y tipo de gasto</h2>
+
+<dx-form
+  [formData]="filter"
+  [colCount]="2"
+  labelLocation="top"
+  (onSubmit)="onSubmit()"
+>
+  <!-- Fecha de Inicio -->
+  <dxi-item dataField="Desde" [editorType]="'dxDateBox'" [editorOptions]="{ displayFormat: 'dd/MM/yyyy', placeholder: 'Seleccione la fecha de inicio' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-date-box [(value)]="filter.from"></dx-date-box>
+    </div>
+  </dxi-item>
+  
+  <!-- Fecha de Fin -->
+  <dxi-item dataField="Hasta" [editorType]="'dxDateBox'" [editorOptions]="{ displayFormat: 'dd/MM/yyyy', placeholder: 'Seleccione la fecha final' }">
+    <div *dxTemplate="let data of 'content'">
+      <dx-date-box [(value)]="filter.to"></dx-date-box>
+    </div>
+  </dxi-item>
+
+  <!-- Botón -->
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate="let data of 'content'" style="text-align: right">
+      <dx-button text="Consultar" type="success" (onClick)="onSubmit()"></dx-button>
+    </div>
+  </dxi-item>
+</dx-form>
+
+<dx-data-grid
+  [dataSource]="budgetVsExecuted"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  [rowAlternationEnabled]="true"
+>
+  <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+
+  <dxi-column dataField="month" caption="Mes" dataType="date"></dxi-column>
+  <dxi-column dataField="expenseType" caption="Tipo de Gasto"></dxi-column>
+  <dxi-column dataField="budgetedAmount" caption="Presupuesto" format="currency"></dxi-column>
+  <dxi-column dataField="executedAmount" caption="Ejecutado" format="currency"></dxi-column>
+</dx-data-grid>

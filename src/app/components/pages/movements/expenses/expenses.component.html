@@ -1,0 +1,26 @@
+<h2>Registro de Gasto</h2>
+
+<dx-form [formData]="expense" [colCount]="2">
+  <dxi-item dataField="date" [editorType]="'dxDateBox'" [editorOptions]="{ type: 'date' }"></dxi-item>
+
+  <dxi-item dataField="monetaryFundId" [editorType]="'dxSelectBox'"
+    [editorOptions]="{ items: monetaryFunds, valueExpr: 'id', displayExpr: 'name', placeholder: 'Seleccione el fondo' }">
+  </dxi-item>
+
+  <dxi-item dataField="storeName" [editorType]="'dxTextBox'"></dxi-item>
+
+  <dxi-item dataField="documentType" [editorType]="'dxSelectBox'"
+    [editorOptions]="{ items: documentTypes, placeholder: 'Tipo de documento' }">
+  </dxi-item>
+
+  <dxi-item dataField="notes" [editorType]="'dxTextArea'" [colSpan]="2"></dxi-item>
+</dx-form>
+
+<h3>Detalles del Gasto</h3>
+
+<dx-data-grid [dataSource]="expense.details" [showBorders]="true" [editing]="{ mode: 'form', allowAdding: true, allowUpdating: true, allowDeleting: true }" [keyExpr]="'tempId'">
+  <dxi-column dataField="expenseTypeId" caption="Tipo de Gasto" [lookup]="{ dataSource: expenseTypes, valueExpr: 'id', displayExpr: 'name' }"></dxi-column>
+  <dxi-column dataField="amount" caption="Monto" dataType="number" format="#,##0.00"></dxi-column>
+</dx-data-grid>
+
+<dx-button text="Guardar" type="success" (onClick)="onSave()"></dx-button>
